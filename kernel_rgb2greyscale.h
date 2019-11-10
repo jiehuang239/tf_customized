@@ -9,7 +9,7 @@ struct rgb_greyscaleFunctor {
 #ifdef GOOGLE_CUDA
 // Partially specialize functor for GpuDevice.
 template <typename Eigen::GpuDevice, typename T>
-struct rgb_greyscale_kernelFunctor {
+struct rgb_greyscaleFunctor {
   void operator()(const Eigen::GpuDevice& d, int size, const T* in, T* out);
 };
 #endif
