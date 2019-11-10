@@ -17,16 +17,15 @@ __global__ void rgb_greyscaleCudaKernel(const int size, const T* in, T* out) {
 }
 
 // Define the GPU implementation that launches the CUDA kernel.
-template <GPUDevice, typename T>
-void rgb_greyscalekernelFunctor<GPUDevice, T>::operator()(
-    const GPUDevice& d, int size, const T* in, T* out) {
+template<>
+void rgb_greyscalekernelFunctor<GPUDevice, float>::operator()(const GPUDevice& d, int size, const float* in, float* out) {
   // Launch the cuda kernel.
   //
   // See core/util/gpu_kernel_helper.h for example of computing
   // block count and thread_per_block count.
   int block_count = 256;
   int thread_per_block = 256;
-  rgb_greyscaleCudaKernel<T>
+  rgb_greyscaleCudaKernel<float>
       <<<block_count, thread_per_block, 0, d.stream()>>>(size, in, out);
 }
 

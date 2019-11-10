@@ -20,7 +20,7 @@ template<typename Device,typename T>
 class rgb_greyscale : public OpKernel {
     public:
       explicit rgb_greyscale(OpKernelConstruction* context):OpKernel(context) {}
-      void compute(OpKernelContext* context) override {
+      void compute(OpKernelContext* context)override {
           //your can access input and output tensors from context
           //grab the input tensor
           const Tensor& input_tensor = context->input(0);
@@ -32,6 +32,8 @@ class rgb_greyscale : public OpKernel {
           //T*output_ptr = output_tensor->flat<T>().data();
           //int num_elements = input_tensor.NumElements();
           //Do the computation
+	  int i=0;
+	  i=i+1;
           OP_REQUIRES(context, input_tensor.NumElements() <= tensorflow::kint32max,
                 errors::InvalidArgument("Too many elements in tensor"));
           rgb_greyscaleFunctor<Device, T>()(
@@ -48,7 +50,7 @@ class rgb_greyscale : public OpKernel {
       Name("rgb2greyscale").Device(DEVICE_CPU).TypeConstraint<T>("T"), \
       rgb_greyscale<CPUDevice, T>);
 REGISTER_CPU(float);
-REGISTER_CPU(int32);
+//REGISTER_CPU(int32);
 
 // Register the GPU kernels.
 #ifdef GOOGLE_CUDA
@@ -59,5 +61,5 @@ REGISTER_CPU(int32);
       Name("rgb2greyscale").Device(DEVICE_GPU).TypeConstraint<T>("T"), \
       rgb_greyscale<GPUDevice, T>);
 REGISTER_GPU(float);
-REGISTER_GPU(int32);
+//REGISTER_GPU(int32);
 #endif  // GOOGLE_CUDA
