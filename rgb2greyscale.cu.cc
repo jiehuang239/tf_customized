@@ -19,7 +19,7 @@ __global__ void rgb_greyscaleCudaKernel(const int size, const T* in, T* out) {
 // Define the GPU implementation that launches the CUDA kernel.
 template <typename T>
 void rgb_greyscalekernelFunctor<GPUDevice, T>::operator()(
-    const GPUDevice& d, int size, const T* in, T* out) {
+    GPUDevice& d, int size, const T* in, T* out) {
   // Launch the cuda kernel.
   //
   // See core/util/gpu_kernel_helper.h for example of computing
@@ -31,7 +31,7 @@ void rgb_greyscalekernelFunctor<GPUDevice, T>::operator()(
 }
 
 // Explicitly instantiate functors for the types of OpKernels registered.
-template struct rgb_greyscale_kernelFunctor<GPUDevice, float>;
-template struct rgb_greyscale_kernelFunctor<GPUDevice, int32>;
+template struct rgb_greyscalekernelFunctor<GPUDevice, float>;
+template struct rgb_greyscalekernelFunctor<GPUDevice, int32>;
 
 #endif  // GOOGLE_CUDA
