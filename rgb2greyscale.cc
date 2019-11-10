@@ -54,7 +54,7 @@ REGISTER_CPU(int32);
 #ifdef GOOGLE_CUDA
 #define REGISTER_GPU(T)                                          \
   /* Declare explicit instantiations in rgb2greyscale.cu.cc. */ \
-  extern template rgb_greyscale_kernelFunctor<GPUDevice, T>;                  \
+  extern template rgb_greyscalekernelFunctor<GPUDevice, T>;                  \
   REGISTER_KERNEL_BUILDER(                                       \
       Name("rgb2greyscale").Device(DEVICE_GPU).TypeConstraint<T>("T"), \
       rgb_greyscale<GPUDevice, T>);
