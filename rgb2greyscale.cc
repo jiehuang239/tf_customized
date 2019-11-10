@@ -20,7 +20,7 @@ template<typename Device,typename T>
 class rgb_greyscale : public OpKernel {
     public:
       explicit rgb_greyscale(OpKernelConstruction* context):OpKernel(context) {}
-      void compute( OpKernelContext* context) override {
+      virtual void compute( OpKernelContext* context) {
           //your can access input and output tensors from context
           //grab the input tensor
           const Tensor& input_tensor = context->input(0);
@@ -34,10 +34,11 @@ class rgb_greyscale : public OpKernel {
           //T*output_ptr = output_tensor->flat<T>().data();
           //int num_elements = input_tensor.NumElements();
           //Do the computation
-	  const int n = input.size()/3;
+	  const int N = input.size()/3;
 	  for (int i = 1;i< N;i++) {
 	  	output(i) = input(3*i)*0.21+input(3*i+1)*0.71+input(3*i+2);
 	  }
+	  return;
       } 
     
 };
