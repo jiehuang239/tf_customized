@@ -17,7 +17,7 @@ __global__ void rgb_greyscaleCudaKernel(const int size, const T* in, T* out) {
 }
 
 // Define the GPU implementation that launches the CUDA kernel.
-template <typename T>
+template <GPUDevice, typename T>
 void rgb_greyscalekernelFunctor<GPUDevice, T>::operator()(
     const GPUDevice& d, int size, const T* in, T* out) {
   // Launch the cuda kernel.
